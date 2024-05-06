@@ -1,5 +1,9 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 interface WeatherDetail {
   dt: number;
@@ -57,7 +61,19 @@ interface WeatherData {
 }
 
 export default function Home() {
-  // https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56
+
+  const { isLoading, error, data } = useQuery<WeatherData>(
+    "repoData",
+    async () => {
+      const { data } = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
+      );
+      return data;
+    }
+  );
+
+  console.log("data", data);
+
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
       <Navbar />
