@@ -1,9 +1,11 @@
+/** @format */
 "use client";
 
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { format, parseISO } from "date-fns";
 
 interface WeatherDetail {
   dt: number;
@@ -66,17 +68,33 @@ export default function Home() {
     "repoData",
     async () => {
       const { data } = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${place}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
       );
       return data;
     }
   );
+
+  const firstData = data?.list[0];
 
   console.log("data", data);
 
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
       <Navbar />
+      <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9  w-full  pb-10 pt-4 ">
+        {/* today data */}
+        <section>
+          <div>
+            <h2 className="flex gap-1 text-2xl  items-end ">
+              <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p>
+            </h2>
+            <div></div>
+          </div>
+        </section>
+
+        {/* 7 day forcast */}
+        <section></section>
+      </main>
     </div>
   );
 }
