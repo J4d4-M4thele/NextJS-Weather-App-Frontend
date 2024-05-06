@@ -8,6 +8,7 @@ import axios from "axios";
 import { format, parseISO } from "date-fns";
 import { useEffect } from "react";
 import Container from "@/components/Container";
+import { convertKelvinToCelcius } from "@/utils/convertKelvinToCelcius";
 
 interface WeatherDetail {
   dt: number;
@@ -89,8 +90,8 @@ export default function Home() {
       <Navbar />
       <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9  w-full  pb-10 pt-4 ">
         {/* today data */}
-        <section>
-          <div>
+        <section className="space-y-4">
+          <div className="space-y-2">
             <h2 className="flex gap-1 text-2xl  items-end ">
               <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p>
               <p className="text-lg">
@@ -98,7 +99,17 @@ export default function Home() {
               </p>
             </h2>
             <Container className=" gap-10 px-6 items-center">
-              <div className="flex flex-col px-4"></div>
+              <div className="flex flex-col px-4">
+                <span>
+                {convertKelvinToCelcius(firstData?.main.temp ?? 296.37)}°
+                </span>
+                <p className="text-xs space-x-1 whitespace-nowrap">
+                  <span> Feels like</span>
+                  <span>
+                  {convertKelvinToCelcius(firstData?.main.feels_like ?? 0)}°
+                  </span>
+                </p>
+              </div>
             </Container>
           </div>
         </section>
