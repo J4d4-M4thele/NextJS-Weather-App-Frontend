@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { format, parseISO } from "date-fns";
+import { useEffect } from "react";
 
 interface WeatherDetail {
   dt: number;
@@ -64,15 +65,19 @@ interface WeatherData {
 
 export default function Home() {
 
-  const { isLoading, error, data } = useQuery<WeatherData>(
+  const { isLoading, error, data, refetch } = useQuery<WeatherData>(
     "repoData",
     async () => {
       const { data } = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${place}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
+        `https://api.openweathermap.org/data/2.5/forecast?q=pune&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
       );
       return data;
     }
   );
+
+  // useEffect(() => {
+  //   refetch();
+  // }, [place, refetch])
 
   const firstData = data?.list[0];
 
@@ -87,6 +92,9 @@ export default function Home() {
           <div>
             <h2 className="flex gap-1 text-2xl  items-end ">
               <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p>
+              <p className="text-lg">
+                ({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")})
+              </p>
             </h2>
             <div></div>
           </div>
