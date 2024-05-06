@@ -101,12 +101,21 @@ export default function Home() {
             <Container className=" gap-10 px-6 items-center">
               <div className="flex flex-col px-4">
                 <span>
-                {convertKelvinToCelcius(firstData?.main.temp ?? 296.37)}°
+                  {convertKelvinToCelcius(firstData?.main.temp ?? 296.37)}°
                 </span>
                 <p className="text-xs space-x-1 whitespace-nowrap">
                   <span> Feels like</span>
                   <span>
-                  {convertKelvinToCelcius(firstData?.main.feels_like ?? 0)}°
+                    {convertKelvinToCelcius(firstData?.main.feels_like ?? 0)}°
+                  </span>
+                </p>
+                <p className="text-xs space-x-2">
+                  <span>
+                    {convertKelvinToCelcius(firstData?.main.temp_min ?? 0)}°↓{" "}
+                  </span>
+                  <span>
+                    {" "}
+                    {convertKelvinToCelcius(firstData?.main.temp_max ?? 0)}°↑
                   </span>
                 </p>
               </div>
