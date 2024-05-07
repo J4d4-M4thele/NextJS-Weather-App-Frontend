@@ -10,7 +10,8 @@ import { useEffect } from "react";
 import Container from "@/components/Container";
 import { convertKelvinToCelcius } from "@/utils/convertKelvinToCelcius";
 import WeatherIcon from "@/components/WeatherIcon";
-import { getDayOrNightIcon } from "@/utils/getDayOrNight";
+import { getDayOrNightIcon } from "@/utils/getDayOrNightIcon";
+import { metersToKilometers } from "@/utils/metersToKilometers";
 import WeatherDetails from "@/components/WeatherDetails";
 
 interface WeatherDetail {
@@ -149,9 +150,14 @@ export default function Home() {
             </Container>
             <Container className="bg-yellow-300/80  px-6 gap-4 justify-between overflow-x-auto">
               <WeatherDetails
-                // visability={metersToKilometers(
-                //   firstData?.visibility ?? 10000
-                // )}
+                visability={metersToKilometers(
+                  firstData?.visibility ?? 10000
+                )}
+                airPressure={`${firstData?.main.pressure} hPa`}
+                humidity={`${firstData?.main.humidity}%`}
+                sunrise={format(data?.city.sunrise ?? 1702949452, "H:mm")}
+                sunset={format(data?.city.sunset ?? 1702517657, "H:mm")}
+                windSpeed={convertWindSpeed(firstData?.wind.speed ?? 1.64)}
               />
             </Container>
             {/* right */}
