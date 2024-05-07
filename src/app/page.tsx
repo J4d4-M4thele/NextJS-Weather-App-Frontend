@@ -9,6 +9,7 @@ import { format, parseISO } from "date-fns";
 import { useEffect } from "react";
 import Container from "@/components/Container";
 import { convertKelvinToCelcius } from "@/utils/convertKelvinToCelcius";
+import WeatherIcon from "@/components/WeatherIcon";
 
 interface WeatherDetail {
   dt: number;
@@ -126,6 +127,7 @@ export default function Home() {
                   <p className="whitespace-nowrap">
                     {format(parseISO(d.dt_txt), 'h:nm a')}
                   </p>
+                  <WeatherIcon iconName={d.weather[0].icon}/>
                   <p>{convertKelvinToCelcius(d?.main.temp ?? 0)}°</p>
                 </div>
                 )}
