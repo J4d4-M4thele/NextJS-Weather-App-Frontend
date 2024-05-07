@@ -119,6 +119,17 @@ export default function Home() {
                   </span>
                 </p>
               </div>
+              {/* time and weather icon */}
+              <div className="flex gap-10 sm:gap-16 overflow-x-auto w-full justify-between pr-3">
+                {data?.list.map((d, i) => 
+                <div key={i} className="flex flex-col justify-between gap-2 items-center text-xs font-semibold">
+                  <p className="whitespace-nowrap">
+                    {format(parseISO(d.dt_txt), 'h:nm a')}
+                  </p>
+                  <p>{convertKelvinToCelcius(d?.main.temp ?? 0)}°</p>
+                </div>
+                )}
+              </div>
             </Container>
           </div>
         </section>
