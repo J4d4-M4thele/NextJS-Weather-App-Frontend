@@ -72,6 +72,8 @@ interface WeatherData {
 
 export default function Home() {
 
+  // const [place, setPlace] = 
+
   const { isLoading, error, data, refetch } = useQuery<WeatherData>(
     "repoData",
     async () => {
