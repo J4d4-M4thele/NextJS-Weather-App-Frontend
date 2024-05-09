@@ -28,7 +28,7 @@ export default function Navbar({ location }: Props) {
         if (value.length >= 3) {
             try {
                 const res = await axios.get(
-                    `https://api.openweathermap.org/data/2.5/find?q=${value}&units=metric&appid=${API_KEY}&cnt=56`
+                    `https://api.openweathermap.org/data/2.5/find?q=${value}&units=metric&appid=${API_KEY}`
                 );
                 const suggestions = res.data.list.map((item: any) => item.name);
                 setSuggestions(suggestions);
@@ -88,10 +88,10 @@ export default function Navbar({ location }: Props) {
     return (
         <><nav className="shadow-sm sticky top-0 left-0 z-50 bg-white">
             <div className="h-[80px]     w-full    flex   justify-between items-center  max-w-7xl px-3 mx-auto">
-                <p className="flex items-center justify-center gap-2  ">
-                    <h2 className="text-gray-500 text-3xl">Weather</h2>
+                {/* <p className="flex items-center justify-center gap-2  "> */}
+                    <h2 className="text-gray-500 text-3xl flex items-center justify-center gap-2">Weather</h2>
                     <MdWbSunny className="text-3xl mt-1 text-yellow-300" />
-                </p>
+                {/* </p> */}
                 {/*  */}
                 <section className="flex gap-2 items-center">
                     <MdMyLocation

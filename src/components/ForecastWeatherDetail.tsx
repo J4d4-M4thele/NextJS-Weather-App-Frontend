@@ -40,11 +40,11 @@ export default function ForecastWeatherDetail(props: ForecastWeatherDetailProps)
                 {/*  */}
                 <div className="flex flex-col px-4">
                     <span>{convertKelvinToCelcius(temp ?? 0)}°</span>
-                    <p className="text-xs space-x-1 whitespace-nowrap">
+                    <div className="text-xs space-x-1 whitespace-nowrap">
                         <span>Feels like</span>
                         <span>{convertKelvinToCelcius(feels_like ?? 0)}°</span>
                         <p className="capitalize">{description}</p>
-                    </p>
+                    </div>
                 </div>
             </section>
             {/* right */}
