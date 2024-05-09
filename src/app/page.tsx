@@ -172,7 +172,7 @@ export default function Home() {
                         <p className="whitespace-nowrap">
                           {format(parseISO(d.dt_txt), 'h:mm')}
                         </p>
-                        <WeatherIcon iconName={getDayOrNightIcon(d.weather[0].icon, d.dt_txt)} />
+                        <WeatherIcon iconname={getDayOrNightIcon(d.weather[0].icon, d.dt_txt)} />
                         <p>{convertKelvinToCelcius(d?.main.temp ?? 0)}°</p>
                       </div>
                     )}
@@ -185,7 +185,7 @@ export default function Home() {
                   <p className=" capitalize text-center">
                     {firstData?.weather[0].description}{" "}
                   </p>
-                  <WeatherIcon iconName={getDayOrNightIcon(
+                  <WeatherIcon iconname={getDayOrNightIcon(
                     firstData?.weather[0].icon ?? "",
                     firstData?.dt_txt ?? ""
                   )} />
